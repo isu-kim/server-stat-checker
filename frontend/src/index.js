@@ -7,7 +7,7 @@ import "./scss/volt.scss";
 import "./main.css";
 import "react-datetime/css/react-datetime.css";
 
-import serverData from "./servers.json";
+import serverData from "./data/servers.json";
 
 const App = () => {
   const [servers, setServers] = useState([]);
@@ -101,67 +101,45 @@ const App = () => {
 
   const handleCopyToClipboard = (ip) => {
     const password = prompt("Enter the password to copy the IP address:");
-  
-    if (password) {
-      // Convert the input password to a SHA-256 hash
-      async function hashPassword(password) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, "0")).join("");
-        return hashHex;
+
+    if (password && password === process.env.REACT_APP_PASSWORD) {
+      const fallbackCopyToClipboard = (text) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          const successful = document.execCommand("copy");
+          const message = successful ? "IP was copied to clipboard" : "Failed to copy IP to clipboard";
+          alert(message);
+        } catch (error) {
+          console.error("Failed to copy IP to clipboard:", error);
+          alert("Failed to copy IP to clipboard");
+        }
+
+        document.body.removeChild(textArea);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ip)
+          .then(() => {
+            alert("IP was copied to clipboard");
+          })
+          .catch((error) => {
+            console.error("Failed to copy IP to clipboard:", error);
+            fallbackCopyToClipboard(ip);
+          });
+      } else {
+        fallbackCopyToClipboard(ip);
       }
-  
-      hashPassword(password)
-        .then(async inputPasswordHash => {
-          const envPassword = process.env.REACT_APP_PASSWORD;
-          const envPasswordHash = await hashPassword(envPassword);
-  
-          if (inputPasswordHash === envPasswordHash) {
-            const fallbackCopyToClipboard = (text) => {
-              const textArea = document.createElement("textarea");
-              textArea.value = text;
-              textArea.style.position = "fixed";
-              document.body.appendChild(textArea);
-              textArea.focus();
-              textArea.select();
-  
-              try {
-                const successful = document.execCommand("copy");
-                const message = successful ? "IP was copied to clipboard" : "Failed to copy IP to clipboard";
-                alert(message);
-              } catch (error) {
-                console.error("Failed to copy IP to clipboard:", error);
-                alert("Failed to copy IP to clipboard");
-              }
-  
-              document.body.removeChild(textArea);
-            };
-  
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(ip)
-                .then(() => {
-                  alert("IP was copied to clipboard");
-                })
-                .catch((error) => {
-                  console.error("Failed to copy IP to clipboard:", error);
-                  fallbackCopyToClipboard(ip);
-                });
-            } else {
-              fallbackCopyToClipboard(ip);
-            }
-          } else {
-            alert("Incorrect password. IP address not copied.");
-          }
-        })
-        .catch(error => {
-          console.error("Failed to hash the password:", error);
-          alert("An error occurred. Please try again.");
-        });
+    } else {
+      alert("Incorrect password. IP address not copied.");
     }
   };
-  
+
   return (
     <div className="container mt-4">
       <Card className="mt-4">

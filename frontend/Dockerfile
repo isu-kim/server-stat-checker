@@ -4,6 +4,7 @@ RUN apt-get update
 RUN apt-get install -y npm
 
 WORKDIR /app
+RUN mkdir data
 COPY package.json ./
 COPY public ./public
 COPY src ./src
