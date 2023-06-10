@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    container_name: stats-backend
+    image: isukim/ss-backend
+    expose:
+      - "5001"
+    restart: unless-stopped
+  frontend:
+    container_name: stats-frontend
+    image: isukim/ss-frontend
+    volumes:
+      - ./data:/app/src/data
+    environment:
+      - REACT_APP_BACKEND_URL=http://stats-backend:5001
+      - REACT_APP_PASSWORD=test123
+    ports:
+      - "3000:3000/tcp"
+    restart: unless-stopped
+    command: /bin/bash -c "echo CI=true > .env && npm start"

@@ -1,0 +1,30 @@
+[
+    {
+        "name": "flagship",
+        "description": "Ubuntu Server for general purpose.",
+        "ip": "220.149.231.241",
+        "port": 22,
+        "type": "Bare Metal"
+    },
+    {
+        "name": "Gabia - KR",
+        "description": "DNS Server and Socat server for KR traffic.",
+        "ip": "139.150.75.28",
+        "port": 92,
+        "type": "VPS"
+    },
+    {
+        "name": "OVH - SG",
+        "description": "URL Shortner and Web Page Server.",
+        "ip": "15.235.167.173",
+        "port": 22,
+        "type": "VPS"
+    },
+    {
+        "name": "Vultr - JP",
+        "description": "VPN Server for JP Traffic with Transmission Torrent.",
+        "ip": "149.28.28.19",
+        "port": 22,
+        "type": "VPS"
+    }
+]
