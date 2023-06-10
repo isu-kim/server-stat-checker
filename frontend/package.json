@@ -1,0 +1,74 @@
+{
+  "name": "@isukim/serverstats",
+  "description": "Simple Server Status Checker",
+  "author": "isukim",
+  "keywords": [
+    "bootstrap 5",
+    "react"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/isu-kim/server-stat-checker",
+  "bugs": {
+    "url": "https://github.com/isu-kim/server-stat-checker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isu-kim/server-stat-checker/"
+  },
+  "version": "1.0.1",
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.17",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@themesberg/react-bootstrap": "^1.4.1",
+    "axios": "^1.4.0",
+    "bootstrap": "5.0.0-beta1",
+    "chartist-plugin-tooltips-updated": "^0.1.4",
+    "moment-timezone": "^0.5.31",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-chartist": "^0.14.4",
+    "react-cookie": "^4.1.1",
+    "react-copy-to-clipboard": "^5.0.3",
+    "react-datetime": "^3.0.4",
+    "react-dom": "^16.13.1",
+    "react-github-btn": "^1.2.0",
+    "react-live": "^2.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.3.1",
+    "react-scripts": "3.4.3",
+    "react-transition-group": "^4.4.1",
+    "simplebar-react": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-local": "PUBLIC_URL=./ react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
